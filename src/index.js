@@ -36,9 +36,11 @@ export default function () {
         
         _compileErrors (name, testRunInfo) {
             const heading = this.currentFixtureName + ' - ' + name;
-            
+
             this.report += this.indentString(`<h4>${heading}</h4>\n`);
             testRunInfo.errs.forEach((error) => {
+                if (error.screenshotPath)
+                    this.report += this.indentString(`<img class="img-responsive" src=${error.screenshotPath} />`);
                 this.report += this.indentString(`<pre>`);
                 this.report += this.formatError(error, '');
                 this.report += this.indentString(`</pre>`);
